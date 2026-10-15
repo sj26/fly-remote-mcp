@@ -1,0 +1,34 @@
+[tools]
+go = "1.26.8"
+flyctl = "0.4.97"
+
+[tasks.format]
+description = "Format Go sources"
+run = "gofmt -w cmd internal"
+
+[tasks.format-check]
+description = "Check Go formatting"
+run = '''
+files="$(gofmt -l cmd internal)"
+test -z "$files" || { echo "Unformatted files:"; echo "$files"; exit 1; }
+'''
+
+[tasks.test]
+description = "Run OAuth and in-process MCP tests with the race detector"
+run = 'go test -race ./...'
+
+[tasks.vet]
+description = "Run Go static analysis"
+run = "go vet ./..."
+
+[tasks.check]
+description = "Run all checks"
+depends = ["format-check", "test", "vet"]
+
+[tasks.build]
+description = "Build the gateway"
+run = "go build ./cmd/fly-mcp"
+
+[tasks.deploy]
+description = "Deploy to Fly.io"
+run = "flyctl deploy --remote-only --yes --ha=false"

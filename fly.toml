@@ -1,0 +1,38 @@
+# Replace the app name, region, and [env] URLs before deploying.
+app = "my-fly-mcp"
+primary_region = "iad"
+
+[build]
+
+[deploy]
+  strategy = "rolling"
+
+[env]
+  PUBLIC_BASE_URL = "https://my-fly-mcp.fly.dev"
+  # Space-separated exact callback URLs of the MCP clients you allow.
+  OAUTH_REDIRECT_URIS = "https://mcp-client.example/oauth/callback"
+  PORT = "8080"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "suspend"
+  auto_start_machines = true
+  min_machines_running = 1
+
+  [http_service.concurrency]
+    type = "requests"
+    soft_limit = 20
+    hard_limit = 50
+
+  [[http_service.checks]]
+    grace_period = "10s"
+    interval = "30s"
+    method = "GET"
+    timeout = "3s"
+    path = "/healthz"
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory = "512mb"

@@ -1,0 +1,1444 @@
+[
+  {
+    "ToolArgs": {
+      "name": {
+        "Description": "Name of the app",
+        "Required": false,
+        "Type": "string"
+      },
+      "network": {
+        "Description": "Custom network id",
+        "Required": false,
+        "Type": "string"
+      },
+      "org": {
+        "Description": "Slug of the organization to create the app in",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Create a new Fly.io app.  If you don't specify a name, one will be generated for you.",
+    "ToolName": "fly-apps-create"
+  },
+  {
+    "ToolArgs": {
+      "name": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Destroy a Fly.io app.  All machines and volumes will be destroyed.",
+    "ToolName": "fly-apps-destroy"
+  },
+  {
+    "ToolArgs": {
+      "org": {
+        "Description": "Slug of the organization to list apps for",
+        "Required": false,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "List all Fly.io apps in the organization",
+    "ToolName": "fly-apps-list"
+  },
+  {
+    "ToolArgs": {
+      "name": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      },
+      "org": {
+        "Description": "Slug of the organization to move the app to",
+        "Required": true,
+        "Type": "string"
+      },
+      "skip-health-checks": {
+        "Description": "Skip health checks during the move",
+        "Required": false,
+        "Type": "boolean"
+      }
+    },
+    "ToolDescription": "Move a Fly.io app to a different organization",
+    "ToolName": "fly-apps-move"
+  },
+  {
+    "ToolArgs": {
+      "name": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "List all releases for a Fly.io app, including type, when, success/fail and which user triggered the release.",
+    "ToolName": "fly-apps-releases"
+  },
+  {
+    "ToolArgs": {
+      "force-stop": {
+        "Description": "Force stop the app before restarting",
+        "Required": false,
+        "Type": "boolean"
+      },
+      "name": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      },
+      "skip-health-checks": {
+        "Description": "Skip health checks during the restart",
+        "Required": false,
+        "Type": "boolean"
+      }
+    },
+    "ToolDescription": "Restart a Fly.io app. Perform a rolling restart against all running Machines.",
+    "ToolName": "fly-apps-restart"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      },
+      "hostname": {
+        "Description": "The hostname to add a certificate for (e.g. www.example.com)",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Add an SSL/TLS certificate for a Fly.io app.",
+    "ToolName": "fly-certs-add"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      },
+      "hostname": {
+        "Description": "The hostname to check the certificate for (e.g. www.example.com)",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Check the status of an SSL/TLS certificate for a Fly.io app.",
+    "ToolName": "fly-certs-check"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "List all SSL/TLS certificates for a Fly.io app.",
+    "ToolName": "fly-certs-list"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      },
+      "hostname": {
+        "Description": "The hostname to remove the certificate for (e.g. www.example.com)",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Remove an SSL/TLS certificate for a Fly.io app.",
+    "ToolName": "fly-certs-remove"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      },
+      "hostname": {
+        "Description": "The hostname to show the certificate for (e.g. www.example.com)",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Show details for an SSL/TLS certificate for a Fly.io app.",
+    "ToolName": "fly-certs-show"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      },
+      "region": {
+        "Description": "Region to allocate the IP address in",
+        "Required": false,
+        "Type": "string"
+      },
+      "shared": {
+        "Default": "false",
+        "Description": "Allocate a shared IPv4 address instead of dedicated",
+        "Required": false,
+        "Type": "boolean"
+      }
+    },
+    "ToolDescription": "Allocate an IPv4 address to the application. Dedicated IPv4 addresses cost $2/mo.",
+    "ToolName": "fly-ips-allocate-v4"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      },
+      "network": {
+        "Description": "Target network name for a Flycast private IPv6 address",
+        "Required": false,
+        "Type": "string"
+      },
+      "org": {
+        "Description": "Organization slug (required for private IPv6)",
+        "Required": false,
+        "Type": "string"
+      },
+      "private": {
+        "Default": "false",
+        "Description": "Allocate a private IPv6 address",
+        "Required": false,
+        "Type": "boolean"
+      },
+      "region": {
+        "Description": "Region to allocate the IP address in",
+        "Required": false,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Allocate an IPv6 address to the application",
+    "ToolName": "fly-ips-allocate-v6"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "List all IP addresses allocated to the application",
+    "ToolName": "fly-ips-list"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "List instances' private IP addresses, accessible from within the Fly network",
+    "ToolName": "fly-ips-private"
+  },
+  {
+    "ToolArgs": {
+      "addresses": {
+        "Description": "IP addresses to release",
+        "Required": true,
+        "Type": "array"
+      },
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Release one or more IP addresses from the application",
+    "ToolName": "fly-ips-release"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      },
+      "machine": {
+        "Description": "Specific machine ID",
+        "Required": false,
+        "Type": "string"
+      },
+      "region": {
+        "Description": "Region to get logs from",
+        "Required": false,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Get logs for a Fly.io app or specific machine",
+    "ToolName": "fly-logs"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": false,
+        "Type": "string"
+      },
+      "attach-volume": {
+        "Description": "Attach a volume to the new machine",
+        "Required": false,
+        "Type": "string"
+      },
+      "clear-auto-destroy": {
+        "Description": "Disable auto destroy setting on the new Machine",
+        "Required": false,
+        "Type": "boolean"
+      },
+      "clear-cmd": {
+        "Description": "Set empty CMD on the new Machine so it uses default CMD for the image",
+        "Required": false,
+        "Type": "boolean"
+      },
+      "from-snapshot": {
+        "Description": "Clone attached volumes and restore from snapshot, use 'last' for most recent snapshot. The default is an empty volume.",
+        "Required": false,
+        "Type": "string"
+      },
+      "host-dedication-id": {
+        "Description": "The dedication id of the reserved hosts for your organization (if any)",
+        "Required": false,
+        "Type": "string"
+      },
+      "id": {
+        "Description": "ID of the machine to clone",
+        "Required": true,
+        "Type": "string"
+      },
+      "name": {
+        "Description": "Optional name of the new machine",
+        "Required": false,
+        "Type": "string"
+      },
+      "override-cmd": {
+        "Description": "Set CMD on the new Machine to this value",
+        "Required": false,
+        "Type": "string"
+      },
+      "region": {
+        "Description": "Region to create the new machine in",
+        "Required": false,
+        "Type": "string"
+      },
+      "standby-for": {
+        "Description": "Standby for a machine in the same region",
+        "Required": false,
+        "Type": "array"
+      },
+      "vm-cpu-kind": {
+        "Description": "The CPU kind to use for the new machine",
+        "Enum": [
+          "shared",
+          "dedicated"
+        ],
+        "Required": false,
+        "Type": "enum"
+      },
+      "vm-cpus": {
+        "Description": "The number of CPUs to use for the new machine",
+        "Required": false,
+        "Type": "number"
+      },
+      "vm-memory": {
+        "Description": "The amount of memory (in megabytes) to use for the new machine",
+        "Required": false,
+        "Type": "number"
+      },
+      "vm-size": {
+        "Description": "The VM size to set machines to. See \"fly platform vm-sizes\" for valid values",
+        "Required": false,
+        "Type": "string"
+      },
+      "volume-requires-unique-zone": {
+        "Default": "true",
+        "Description": "Require volume to be placed in separate hardware zone from existing volumes.",
+        "Required": false,
+        "Type": "boolean"
+      }
+    },
+    "ToolDescription": "Clone a Fly Machine. The new Machine will be a copy of the specified Machine. If the original Machine has a volume, then a new empty volume will be created and attached to the new Machine.",
+    "ToolName": "fly-machine-clone"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": false,
+        "Type": "string"
+      },
+      "id": {
+        "Description": "ID of the machine to cordon",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Deactivate all services on a machine",
+    "ToolName": "fly-machine-cordon"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      },
+      "autostart": {
+        "Default": "true",
+        "Description": "Automatically start a stopped Machine when a network request is received",
+        "Required": false,
+        "Type": "boolean"
+      },
+      "autostop": {
+        "Default": "off",
+        "Description": "Automatically stop a Machine when there are no network requests for it",
+        "Enum": [
+          "off",
+          "stop",
+          "suspend"
+        ],
+        "Required": false,
+        "Type": "enum"
+      },
+      "entrypoint": {
+        "Description": "The command to override the Docker ENTRYPOINT",
+        "Required": false,
+        "Type": "string"
+      },
+      "env": {
+        "Description": "Set of environment variables in the form of NAME=VALUE pairs.",
+        "Required": false,
+        "Type": "array"
+      },
+      "host-dedication-id": {
+        "Description": "The dedication id of the reserved hosts for your organization (if any)",
+        "Required": false,
+        "Type": "string"
+      },
+      "id": {
+        "Description": "Machine ID, if previously known",
+        "Required": false,
+        "Type": "string"
+      },
+      "image": {
+        "Description": "The image to use for the new machine",
+        "Required": true,
+        "Type": "string"
+      },
+      "metadata": {
+        "Description": "Set of metadata in the form of NAME=VALUE pairs.",
+        "Required": false,
+        "Type": "array"
+      },
+      "name": {
+        "Description": "Name of the new machine. Will be generated if omitted.",
+        "Required": false,
+        "Type": "string"
+      },
+      "port": {
+        "Description": "The external ports and handlers for services, in the format: port[:machinePort][/protocol[:handler[:handler...]]])",
+        "Required": false,
+        "Type": "array"
+      },
+      "region": {
+        "Description": "Region to create the new machine in",
+        "Required": false,
+        "Type": "string"
+      },
+      "restart": {
+        "Description": "Restart policy for the new machine",
+        "Enum": [
+          "no",
+          "always",
+          "on-failure"
+        ],
+        "Required": false,
+        "Type": "enum"
+      },
+      "rm": {
+        "Description": "Automatically remove the Machine when it exits",
+        "Required": false,
+        "Type": "boolean"
+      },
+      "schedule": {
+        "Description": "Schedule for the new machine",
+        "Enum": [
+          "hourly",
+          "daily",
+          "weekly",
+          "monthly"
+        ],
+        "Required": false,
+        "Type": "enum"
+      },
+      "skip-dns-registration": {
+        "Description": "Skip DNS registration for the new machine",
+        "Required": false,
+        "Type": "boolean"
+      },
+      "standby-for": {
+        "Description": "For Machines without services, a comma separated list of Machine IDs to act as standby for.",
+        "Required": false,
+        "Type": "array"
+      },
+      "use-zstd": {
+        "Description": "Use zstd compression for the image",
+        "Required": false,
+        "Type": "boolean"
+      },
+      "vm-cpu-kind": {
+        "Description": "The CPU kind to use for the new machine",
+        "Enum": [
+          "shared",
+          "dedicated"
+        ],
+        "Required": false,
+        "Type": "enum"
+      },
+      "vm-cpus": {
+        "Description": "The number of CPUs to use for the new machine",
+        "Required": false,
+        "Type": "number"
+      },
+      "vm-memory": {
+        "Description": "The amount of memory (in megabytes) to use for the new machine",
+        "Required": false,
+        "Type": "number"
+      },
+      "vm-size": {
+        "Description": "The VM size to set machines to. See \"fly platform vm-sizes\" for valid values",
+        "Required": false,
+        "Type": "string"
+      },
+      "volume": {
+        "Description": "Volume to mount, in the form of \u003cvolume_id_or_name\u003e:/path/inside/machine[:\u003coptions\u003e]",
+        "Required": false,
+        "Type": "array"
+      }
+    },
+    "ToolDescription": "Create, but don’t start, a machine",
+    "ToolName": "fly-machine-create"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": false,
+        "Type": "string"
+      },
+      "force": {
+        "Description": "Force destroy the machine, even if it is running",
+        "Required": false,
+        "Type": "boolean"
+      },
+      "id": {
+        "Description": "ID of the machine to destroy",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Destroy one or more Fly machines. This command requires a machine to be in a stopped or suspended state unless the force flag is used.",
+    "ToolName": "fly-machine-destroy"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": false,
+        "Type": "string"
+      },
+      "id": {
+        "Description": "ID of the machine to allocate egress IP for",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Allocate a pair of static egress IPv4 and IPv6 for a machine",
+    "ToolName": "fly-machine-egress-ip-allocate"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": false,
+        "Type": "string"
+      },
+      "id": {
+        "Description": "ID of the machine to list egress IP for",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "List all static egress IPv4 and IPv6 for a machine",
+    "ToolName": "fly-machine-egress-ip-list"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": false,
+        "Type": "string"
+      },
+      "id": {
+        "Description": "ID of the machine to release egress IP for",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Release a pair of static egress IPv4 and IPv6 for a machine",
+    "ToolName": "fly-machine-egress-ip-release"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": false,
+        "Type": "string"
+      },
+      "command": {
+        "Description": "Command to run on the machine",
+        "Required": true,
+        "Type": "string"
+      },
+      "id": {
+        "Description": "ID of the machine to run the command on",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Run a command on a machine",
+    "ToolName": "fly-machine-exec"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": false,
+        "Type": "string"
+      },
+      "id": {
+        "Description": "ID of the machine to kill",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Kill (SIGKILL) a Fly machine",
+    "ToolName": "fly-machine-kill"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": false,
+        "Type": "string"
+      },
+      "id": {
+        "Description": "ID of the machine to clear leases for",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Clear the leases for a machine",
+    "ToolName": "fly-machine-leases-clear"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": false,
+        "Type": "string"
+      },
+      "id": {
+        "Description": "ID of the machine to list leases for",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "View machine leases",
+    "ToolName": "fly-machine-leases-view"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "List all machines for a Fly app",
+    "ToolName": "fly-machine-list"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": false,
+        "Type": "string"
+      },
+      "force": {
+        "Description": "Force stop if it is running",
+        "Required": false,
+        "Type": "boolean"
+      },
+      "id": {
+        "Description": "ID of the machine to restart",
+        "Required": true,
+        "Type": "string"
+      },
+      "signal": {
+        "Description": "Signal to send to the machine",
+        "Required": false,
+        "Type": "string"
+      },
+      "skip-health-checks": {
+        "Description": "Skip health checks during the restart",
+        "Required": false,
+        "Type": "boolean"
+      },
+      "time": {
+        "Description": "Seconds to wait before killing the machine",
+        "Required": false,
+        "Type": "number"
+      }
+    },
+    "ToolDescription": "Restart a Fly machine",
+    "ToolName": "fly-machine-restart"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      },
+      "autostart": {
+        "Default": "true",
+        "Description": "Automatically start a stopped Machine when a network request is received",
+        "Required": false,
+        "Type": "boolean"
+      },
+      "autostop": {
+        "Default": "off",
+        "Description": "Automatically stop a Machine when there are no network requests for it",
+        "Enum": [
+          "off",
+          "stop",
+          "suspend"
+        ],
+        "Required": false,
+        "Type": "enum"
+      },
+      "command": {
+        "Description": "Command to run on the machine",
+        "Required": false,
+        "Type": "string"
+      },
+      "entrypoint": {
+        "Description": "The command to override the Docker ENTRYPOINT",
+        "Required": false,
+        "Type": "string"
+      },
+      "env": {
+        "Description": "Set of environment variables in the form of NAME=VALUE pairs.",
+        "Required": false,
+        "Type": "array"
+      },
+      "host-dedication-id": {
+        "Description": "The dedication id of the reserved hosts for your organization (if any)",
+        "Required": false,
+        "Type": "string"
+      },
+      "id": {
+        "Description": "Machine ID, if previously known",
+        "Required": false,
+        "Type": "string"
+      },
+      "image": {
+        "Description": "The image to use for the new machine",
+        "Required": true,
+        "Type": "string"
+      },
+      "metadata": {
+        "Description": "Set of metadata in the form of NAME=VALUE pairs.",
+        "Required": false,
+        "Type": "array"
+      },
+      "name": {
+        "Description": "Name of the new machine. Will be generated if omitted.",
+        "Required": false,
+        "Type": "string"
+      },
+      "port": {
+        "Description": "The external ports and handlers for services, in the format: port[:machinePort][/protocol[:handler[:handler...]]])",
+        "Required": false,
+        "Type": "array"
+      },
+      "region": {
+        "Description": "Region to create the new machine in",
+        "Required": false,
+        "Type": "string"
+      },
+      "restart": {
+        "Description": "Restart policy for the new machine",
+        "Enum": [
+          "no",
+          "always",
+          "on-failure"
+        ],
+        "Required": false,
+        "Type": "enum"
+      },
+      "rm": {
+        "Description": "Automatically remove the Machine when it exits",
+        "Required": false,
+        "Type": "boolean"
+      },
+      "schedule": {
+        "Description": "Schedule for the new machine",
+        "Enum": [
+          "hourly",
+          "daily",
+          "weekly",
+          "monthly"
+        ],
+        "Required": false,
+        "Type": "enum"
+      },
+      "skip-dns-registration": {
+        "Description": "Skip DNS registration for the new machine",
+        "Required": false,
+        "Type": "boolean"
+      },
+      "standby-for": {
+        "Description": "For Machines without services, a comma separated list of Machine IDs to act as standby for.",
+        "Required": false,
+        "Type": "array"
+      },
+      "use-zstd": {
+        "Description": "Use zstd compression for the image",
+        "Required": false,
+        "Type": "boolean"
+      },
+      "user": {
+        "Description": "User to run the command as",
+        "Required": false,
+        "Type": "string"
+      },
+      "vm-cpu-kind": {
+        "Description": "The CPU kind to use for the new machine",
+        "Enum": [
+          "shared",
+          "dedicated"
+        ],
+        "Required": false,
+        "Type": "enum"
+      },
+      "vm-cpus": {
+        "Description": "The number of CPUs to use for the new machine",
+        "Required": false,
+        "Type": "number"
+      },
+      "vm-memory": {
+        "Description": "The amount of memory (in megabytes) to use for the new machine",
+        "Required": false,
+        "Type": "number"
+      },
+      "vm-size": {
+        "Description": "The VM size to set machines to. See \"fly platform vm-sizes\" for valid values",
+        "Required": false,
+        "Type": "string"
+      },
+      "volume": {
+        "Description": "Volume to mount, in the form of \u003cvolume_id_or_name\u003e:/path/inside/machine[:\u003coptions\u003e]",
+        "Required": false,
+        "Type": "array"
+      }
+    },
+    "ToolDescription": "Run a machine",
+    "ToolName": "fly-machine-run"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": false,
+        "Type": "string"
+      },
+      "id": {
+        "Description": "ID of the machine to start",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Start a Fly machine",
+    "ToolName": "fly-machine-start"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": false,
+        "Type": "string"
+      },
+      "display-config": {
+        "Description": "Display the machine config",
+        "Required": false,
+        "Type": "boolean"
+      },
+      "id": {
+        "Description": "ID of the machine to show status for",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Show current status of a running machine",
+    "ToolName": "fly-machine-status"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": false,
+        "Type": "string"
+      },
+      "id": {
+        "Description": "ID of the machine to stop",
+        "Required": true,
+        "Type": "string"
+      },
+      "signal": {
+        "Description": "Signal to send to the machine",
+        "Required": false,
+        "Type": "string"
+      },
+      "timeout": {
+        "Description": "Seconds to wait before killing the machine",
+        "Required": false,
+        "Type": "number"
+      },
+      "wait-timeout": {
+        "Description": "Seconds to wait for the machine to stop",
+        "Required": false,
+        "Type": "number"
+      }
+    },
+    "ToolDescription": "Stop a Fly machine",
+    "ToolName": "fly-machine-stop"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": false,
+        "Type": "string"
+      },
+      "id": {
+        "Description": "ID of the machine to suspend",
+        "Required": true,
+        "Type": "string"
+      },
+      "wait-timeout": {
+        "Description": "Seconds to wait for the machine to suspend",
+        "Required": false,
+        "Type": "number"
+      }
+    },
+    "ToolDescription": "Suspend a Fly machine",
+    "ToolName": "fly-machine-suspend"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": false,
+        "Type": "string"
+      },
+      "id": {
+        "Description": "ID of the machine to upcordon",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Reactivate all services on a machine",
+    "ToolName": "fly-machine-upcordon"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      },
+      "autostart": {
+        "Default": "true",
+        "Description": "Automatically start a stopped Machine when a network request is received",
+        "Required": false,
+        "Type": "boolean"
+      },
+      "autostop": {
+        "Default": "off",
+        "Description": "Automatically stop a Machine when there are no network requests for it",
+        "Enum": [
+          "off",
+          "stop",
+          "suspend"
+        ],
+        "Required": false,
+        "Type": "enum"
+      },
+      "command": {
+        "Description": "Command to run on the machine",
+        "Required": false,
+        "Type": "string"
+      },
+      "entrypoint": {
+        "Description": "The command to override the Docker ENTRYPOINT",
+        "Required": false,
+        "Type": "string"
+      },
+      "env": {
+        "Description": "Set of environment variables in the form of NAME=VALUE pairs.",
+        "Required": false,
+        "Type": "array"
+      },
+      "host-dedication-id": {
+        "Description": "The dedication id of the reserved hosts for your organization (if any)",
+        "Required": false,
+        "Type": "string"
+      },
+      "id": {
+        "Description": "Machine ID",
+        "Required": true,
+        "Type": "string"
+      },
+      "image": {
+        "Description": "The image to use for the new machine",
+        "Required": false,
+        "Type": "string"
+      },
+      "metadata": {
+        "Description": "Set of metadata in the form of NAME=VALUE pairs.",
+        "Required": false,
+        "Type": "array"
+      },
+      "port": {
+        "Description": "The external ports and handlers for services, in the format: port[:machinePort][/protocol[:handler[:handler...]]])",
+        "Required": false,
+        "Type": "array"
+      },
+      "restart": {
+        "Description": "Restart policy for the new machine",
+        "Enum": [
+          "no",
+          "always",
+          "on-failure"
+        ],
+        "Required": false,
+        "Type": "enum"
+      },
+      "schedule": {
+        "Description": "Schedule for the new machine",
+        "Enum": [
+          "hourly",
+          "daily",
+          "weekly",
+          "monthly"
+        ],
+        "Required": false,
+        "Type": "enum"
+      },
+      "skip-dns-registration": {
+        "Description": "Skip DNS registration for the new machine",
+        "Required": false,
+        "Type": "boolean"
+      },
+      "standby-for": {
+        "Description": "For Machines without services, a comma separated list of Machine IDs to act as standby for.",
+        "Required": false,
+        "Type": "array"
+      },
+      "use-zstd": {
+        "Description": "Use zstd compression for the image",
+        "Required": false,
+        "Type": "boolean"
+      },
+      "vm-cpu-kind": {
+        "Description": "The CPU kind to use for the new machine",
+        "Enum": [
+          "shared",
+          "dedicated"
+        ],
+        "Required": false,
+        "Type": "enum"
+      },
+      "vm-cpus": {
+        "Description": "The number of CPUs to use for the new machine",
+        "Required": false,
+        "Type": "number"
+      },
+      "vm-memory": {
+        "Description": "The amount of memory (in megabytes) to use for the new machine",
+        "Required": false,
+        "Type": "number"
+      },
+      "vm-size": {
+        "Description": "The VM size to set machines to. See \"fly platform vm-sizes\" for valid values",
+        "Required": false,
+        "Type": "string"
+      },
+      "wait-timeout": {
+        "Description": "Seconds to wait for the machine to update",
+        "Required": false,
+        "Type": "number"
+      }
+    },
+    "ToolDescription": "Update a machine",
+    "ToolName": "fly-machine-update"
+  },
+  {
+    "ToolArgs": {
+      "name": {
+        "Description": "Name of the organization",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Create a new organization. Other users can be invited to join the organization later.",
+    "ToolName": "fly-orgs-create"
+  },
+  {
+    "ToolArgs": {
+      "slug": {
+        "Description": "Slug of the organization to delete",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Delete an organization. All apps and machines in the organization will be deleted.",
+    "ToolName": "fly-orgs-delete"
+  },
+  {
+    "ToolArgs": {
+      "email": {
+        "Description": "Email address of the user to invite",
+        "Required": true,
+        "Type": "string"
+      },
+      "slug": {
+        "Description": "Slug of the organization to invite the user to",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Invite a user, by email, to join organization. The invitation will be sent, and the user will be pending until they respond.",
+    "ToolName": "fly-orgs-invite"
+  },
+  {
+    "ToolArgs": {},
+    "ToolDescription": "List all organizations the user is a member of.  Keys are names of the organizations, values are slugs.",
+    "ToolName": "fly-orgs-list"
+  },
+  {
+    "ToolArgs": {
+      "email": {
+        "Description": "Email address of the user to remove",
+        "Required": true,
+        "Type": "string"
+      },
+      "slug": {
+        "Description": "Slug of the organization to remove the user from",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Remove a user from an organization. The user will no longer have access to the organization.",
+    "ToolName": "fly-orgs-remove"
+  },
+  {
+    "ToolArgs": {
+      "slug": {
+        "Description": "Slug of the organization to show",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Shows information about an organization. Includes name, slug and type. Summarizes user permissions, DNS zones and associated member. Details full list of members and roles.",
+    "ToolName": "fly-orgs-show"
+  },
+  {
+    "ToolArgs": {},
+    "ToolDescription": "View a list of regions where Fly has datacenters.",
+    "ToolName": "fly-platform-regions"
+  },
+  {
+    "ToolArgs": {},
+    "ToolDescription": "Get the status of Fly's platform",
+    "ToolName": "fly-platform-status"
+  },
+  {
+    "ToolArgs": {},
+    "ToolDescription": "Get a list of VM sizes available for Fly apps",
+    "ToolName": "fly-platform-vm-sizes"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Deploy secrets to the specified app",
+    "ToolName": "fly-secrets-deploy"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "List secrets for the specified app",
+    "ToolName": "fly-secrets-list"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      },
+      "keyvalues": {
+        "Description": "Secrets to set in KEY=VALUE format",
+        "Required": true,
+        "Type": "hash"
+      }
+    },
+    "ToolDescription": "Set secrets for the specified app; secrets are staged for the next deploy",
+    "ToolName": "fly-secrets-set"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      },
+      "names": {
+        "Description": "Names of secrets to unset",
+        "Required": true,
+        "Type": "array"
+      }
+    },
+    "ToolDescription": "Unset secrets for the specified app; changes are staged for the next deploy",
+    "ToolName": "fly-secrets-unset"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Get status of a Fly.io app",
+    "ToolName": "fly-status"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      },
+      "encrypt": {
+        "Default": "true",
+        "Description": "Encrypt the volume",
+        "Required": false,
+        "Type": "boolean"
+      },
+      "name": {
+        "Description": "name of the volume",
+        "Required": true,
+        "Type": "string"
+      },
+      "region": {
+        "Description": "Region to create the volume in",
+        "Required": true,
+        "Type": "string"
+      },
+      "size": {
+        "Default": "1",
+        "Description": "Size of the volume in GB",
+        "Required": false,
+        "Type": "number"
+      }
+    },
+    "ToolDescription": "Create a new volume for an app. Volumes are persistent storage for Fly Machines.",
+    "ToolName": "fly-volumes-create"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      },
+      "id": {
+        "Description": "id of the volume",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Destroy one or more volumes. When you destroy a volume, you permanently delete all its data.",
+    "ToolName": "fly-volumes-destroy"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      },
+      "id": {
+        "Description": "id of the volume",
+        "Required": true,
+        "Type": "string"
+      },
+      "size": {
+        "Description": "Size of the volume in Gigabytes",
+        "Required": true,
+        "Type": "number"
+      }
+    },
+    "ToolDescription": "Extend a volume to a larger size. You can only extend a volume to a larger size.",
+    "ToolName": "fly-volumes-extend"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      },
+      "id": {
+        "Description": "id of the volume",
+        "Required": true,
+        "Type": "string"
+      },
+      "region": {
+        "Description": "Region to create the new volume in",
+        "Required": false,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Fork the specified volume. Volume forking creates an independent copy of a storage volume for backup, testing, and experimentation without altering the original data.",
+    "ToolName": "fly-volumes-fork"
+  },
+  {
+    "ToolArgs": {
+      "all": {
+        "Default": "false",
+        "Description": "Show all volumes, including those that in destroyed states",
+        "Required": false,
+        "Type": "boolean"
+      },
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "List all volumes for an app. Volumes are persistent storage for Fly Machines.",
+    "ToolName": "fly-volumes-list"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      },
+      "id": {
+        "Description": "id of the volume",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Show details about a volume. Volumes are persistent storage for Fly Machines.",
+    "ToolName": "fly-volumes-show"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      },
+      "id": {
+        "Description": "id of the volume",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "Create a snapshot of a volume. Snapshots are point-in-time copies of a volume.",
+    "ToolName": "fly-volumes-snapshots-create"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      },
+      "id": {
+        "Description": "id of the volume",
+        "Required": true,
+        "Type": "string"
+      }
+    },
+    "ToolDescription": "List all snapshots for a volume. Snapshots are point-in-time copies of a volume.",
+    "ToolName": "fly-volumes-snapshots-list"
+  },
+  {
+    "ToolArgs": {
+      "app": {
+        "Description": "Name of the app",
+        "Required": true,
+        "Type": "string"
+      },
+      "id": {
+        "Description": "id of the volume",
+        "Required": true,
+        "Type": "string"
+      },
+      "scheduled-snapshots": {
+        "Description": "Enable or disable scheduled snapshots",
+        "Required": false,
+        "Type": "boolean"
+      },
+      "snapshot-retention": {
+        "Description": "Retention period for snapshots in days",
+        "Required": false,
+        "Type": "number"
+      }
+    },
+    "ToolDescription": "Update a volume. You can activate or deactivate snapshotting, and change the snapshot's retention period.",
+    "ToolName": "fly-volumes-update"
+  }
+]
