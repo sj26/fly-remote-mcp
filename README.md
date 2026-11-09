@@ -1,5 +1,14 @@
 # Fly.io MCP gateway
 
+> [!WARNING]
+> **Retired: use [Fly.io's official MCP server](https://mcp.fly.io) instead.**
+> This personal gateway is no longer maintained. This repository is retained for historical reference.
+>
+> Replace this gateway's URL in your MCP client with **`https://mcp.fly.io`**, then complete the client's browser OAuth sign-in and review the access you grant.
+> See the [official Fly MCP connection guide](https://mcp.fly.io/guide.md) and [Fly agent setup documentation](https://docs.fly.io/model-context-protocol/setup-agent).
+>
+> The deployment and usage instructions below describe the retired gateway, not the official server. Do not use them for a new installation.
+
 A remote, OAuth-protected [Model Context Protocol](https://modelcontextprotocol.io/) gateway for Fly.io. Each user connects their own Fly account through OAuth; the gateway holds no shared Fly credential.
 
 The gateway implements MCP and Fly API calls in one Go process. There is no `flyctl` subprocess, loopback proxy, CLI configuration, or shared Fly management credential. It reuses Fly's MCP metadata and fly-go API types, not CLI builders or SDK HTTP clients. See [source provenance and regeneration](third_party/README.md).
